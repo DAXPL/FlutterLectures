@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+
 import 'tiles/accelerometer_tile.dart';
-import 'tiles/accelerometer_detail_screen.dart';
+import 'tiles/userAccelerometer_tile.dart';
 import 'tiles/battery_tile.dart';
 import 'tiles/magnetometer_tile.dart';
+import 'tiles/gyroscope_tile.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -22,8 +24,9 @@ class DashboardScreen extends StatelessWidget {
         padding: EdgeInsets.all(15),
         children: [
           AccelerometerTile(),
+          UserAccelerometerTile(),
           MagnetometerTile(),
-          BatteryTile(),
+          GyroscopeTile(),
           Card(color: AccentColor)
         ],
       ),

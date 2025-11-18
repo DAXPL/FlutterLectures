@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
-import 'accelerometer_detail_screen.dart';
+import 'gyroscope_detail_screen.dart';
 import '../constants.dart';
 
-class AccelerometerTile extends StatelessWidget {
-  const AccelerometerTile({super.key});
+class GyroscopeTile extends StatelessWidget {
+  const GyroscopeTile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap to funkcja, która wykona się, gdy użytkownik dotknie (kliknie) ten element
       onTap: () {
-        // Navigator.push() służy do przejścia na nowy ekran.
-        // Flutter traktuje ekrany jak stos kart – push() dokłada nową kartę (nowy ekran) na wierzch.
         Navigator.push(
           context,  
           MaterialPageRoute(
-            builder: (_) => const AccelerometerDetailScreen(),
+            builder: (_) => const GyroscopeDetailScreen(),
           ),
         );
       },
@@ -25,16 +22,16 @@ class AccelerometerTile extends StatelessWidget {
       color: AccentColor,
       child: Padding(
         padding: const EdgeInsets.all(15),
-        child: StreamBuilder<AccelerometerEvent>(
-          stream: accelerometerEventStream(),
-          initialData: AccelerometerEvent(0, 0, 0),
+        child: StreamBuilder<GyroscopeEvent>(
+          stream: gyroscopeEventStream(),
+          initialData: GyroscopeEvent(0, 0, 0),
           builder: (context, snapshot) {
             final e = snapshot.data!;
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Accelerometr\n(m/s)',
+                  'User Gyroscope\n(rad/s))',
                     style: headerTextStyle,
                 ),
                 SizedBox(height: 12,),

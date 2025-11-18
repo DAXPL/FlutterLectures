@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'magnetometer_detail_screen.dart';
 import '../constants.dart'; 
 import 'dart:math';
 
@@ -15,7 +16,17 @@ class MagnetometerTile extends StatelessWidget {
         final e = snapshot.data!;
         final strength = sqrt(e.x*e.x + e.y*e.y + e.z*e.z); 
         final maxVal = strength/3000;
-        return Card(
+      return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,  
+          MaterialPageRoute(
+            builder: (_) => const MagnetometerDetailScreen(),
+          ),
+        );
+      },
+    
+    child: Card(
           color: Color.lerp(AcceptColor, DeclineColor, maxVal), 
           elevation: 4, 
           
@@ -52,7 +63,8 @@ class MagnetometerTile extends StatelessWidget {
               ],
             ),
           ),
-        );
+        ),
+    );
       },
     );
   }

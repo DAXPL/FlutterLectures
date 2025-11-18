@@ -8,3 +8,4 @@ const baseTextStyle = TextStyle(
                           fontWeight: FontWeight.w600,
                           color: AccentColor
                         );
+const headerTextStyle = TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: BackgroundColor);
