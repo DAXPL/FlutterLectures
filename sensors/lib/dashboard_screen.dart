@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'tiles/accelerometer_tile.dart';
+import 'tiles/accelerometer_detail_screen.dart';
 import 'tiles/battery_tile.dart';
 import 'tiles/magnetometer_tile.dart';
+
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
   @override
@@ -22,7 +24,6 @@ class DashboardScreen extends StatelessWidget {
           AccelerometerTile(),
           MagnetometerTile(),
           BatteryTile(),
-          Card(color: AccentColor),
           Card(color: AccentColor)
         ],
       ),

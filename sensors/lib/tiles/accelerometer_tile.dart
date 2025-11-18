@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'accelerometer_detail_screen.dart';
 import '../constants.dart';
 
 class AccelerometerTile extends StatelessWidget {
@@ -7,7 +8,20 @@ class AccelerometerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return InkWell(
+      // onTap to funkcja, która wykona się, gdy użytkownik dotknie (kliknie) ten element
+      onTap: () {
+        // Navigator.push() służy do przejścia na nowy ekran.
+        // Flutter traktuje ekrany jak stos kart – push() dokłada nową kartę (nowy ekran) na wierzch.
+        Navigator.push(
+          context,  
+          MaterialPageRoute(
+            builder: (_) => const AccelerometerDetailScreen(),
+          ),
+        );
+      },
+    
+    child: Card(
       color: AccentColor,
       child: Padding(
         padding: const EdgeInsets.all(15),
@@ -33,6 +47,7 @@ class AccelerometerTile extends StatelessWidget {
           },
         ),
       ),
+    ),
     );
   }
 }
