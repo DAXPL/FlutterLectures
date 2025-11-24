@@ -8,7 +8,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BackgroundColor,
+      backgroundColor: kBackgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -16,7 +16,7 @@ class StartScreen extends StatelessWidget {
             Icon(
               Icons.cabin,
               size: 70,
-              color: AccentColor,
+              color: kAccentColor,
             ),
             const SizedBox(height: 30),
             Text(
@@ -24,7 +24,7 @@ class StartScreen extends StatelessWidget {
               style: TextStyle(
 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AccentColor,
+                color: kAccentColor,
               ),
             ),
             const SizedBox(height: 30),
@@ -33,7 +33,6 @@ fontSize: 20,
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                print("Klik");
                 onStart(context);
               },
               style: ElevatedButton.styleFrom(
@@ -44,10 +43,7 @@ fontSize: 20,
               ),
               child: Text(
                 'Start',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: AccentColor,
-                ),
+                style: headerTextStyle
               ),
             ),
             ),

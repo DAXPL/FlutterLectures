@@ -1,3 +1,4 @@
+import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -13,21 +14,22 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Sensors Dashboard'),
-      backgroundColor: BackgroundColor,
-      foregroundColor: AccentColor,),
+      backgroundColor: kBackgroundColor,
+      foregroundColor: kAccentColor,),
 
-      backgroundColor: BackgroundColor,
+      backgroundColor: kBackgroundColor,
       body: GridView.count(
         crossAxisCount: 2,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
         padding: EdgeInsets.all(15),
         children: [
+          BatteryTile(),
           AccelerometerTile(),
           UserAccelerometerTile(),
           MagnetometerTile(),
           GyroscopeTile(),
-          Card(color: AccentColor)
+          Card(color: kAccentColor)
         ],
       ),
     );

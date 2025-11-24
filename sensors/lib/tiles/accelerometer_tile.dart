@@ -22,7 +22,7 @@ class AccelerometerTile extends StatelessWidget {
       },
     
     child: Card(
-      color: AccentColor,
+      color: kAccentColor,
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: StreamBuilder<AccelerometerEvent>(

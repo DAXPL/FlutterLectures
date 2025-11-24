@@ -51,8 +51,8 @@ class _GyroscopeDetailScreenState extends State<GyroscopeDetailScreen> {
     final latest = _log.isNotEmpty ? _log.first : null;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Gyroscope – szczegóły'),backgroundColor: BackgroundColor,foregroundColor: AccentColor,),
-      backgroundColor: BackgroundColor,
+      appBar: AppBar(title: const Text('Gyroscope – szczegóły'),backgroundColor: kBackgroundColor,foregroundColor: kAccentColor,),
+      backgroundColor: kBackgroundColor,
       body: Column(
         children: [
           Padding(
@@ -107,7 +107,7 @@ class _GyroscopeDetailScreenState extends State<GyroscopeDetailScreen> {
                     style: baseTextStyle,
                   ),
                   subtitle: Text('Czas: $timeStr'),
-                  textColor: AccentColor,
+                  textColor: kAccentColor,
                 );
               },
             ),

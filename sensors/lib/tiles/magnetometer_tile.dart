@@ -27,7 +27,7 @@ class MagnetometerTile extends StatelessWidget {
       },
     
     child: Card(
-          color: Color.lerp(AcceptColor, DeclineColor, maxVal), 
+          color: Color.lerp(kAcceptColor, kDeclineColor, maxVal), 
           elevation: 4, 
           
           child: Padding(
@@ -42,7 +42,7 @@ class MagnetometerTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: BackgroundColor,
+                    color: kBackgroundColor,
                   ),
                 ),
                 
@@ -57,7 +57,7 @@ class MagnetometerTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: BackgroundColor,
+                    color: kBackgroundColor,
                   ),
                 ),
               ],

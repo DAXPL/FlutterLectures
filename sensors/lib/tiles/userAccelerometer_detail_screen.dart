@@ -51,8 +51,8 @@ class _UserAccelerometerDetailScreenState extends State<UserAccelerometerDetailS
     final latest = _log.isNotEmpty ? _log.first : null;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('User Akcelerometr – szczegóły'),backgroundColor: BackgroundColor,foregroundColor: AccentColor,),
-      backgroundColor: BackgroundColor,
+      appBar: AppBar(title: const Text('User Akcelerometr – szczegóły'),backgroundColor: kBackgroundColor,foregroundColor: kAccentColor,),
+      backgroundColor: kBackgroundColor,
       body: Column(
         children: [
           Padding(
@@ -107,7 +107,7 @@ class _UserAccelerometerDetailScreenState extends State<UserAccelerometerDetailS
                     style: baseTextStyle,
                   ),
                   subtitle: Text('Czas: $timeStr'),
-                  textColor: AccentColor,
+                  textColor: kAccentColor,
                 );
               },
             ),
