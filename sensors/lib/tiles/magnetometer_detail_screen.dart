@@ -12,7 +12,7 @@ class MagnetometerDetailScreen extends StatefulWidget {
 }
 
 class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
-  final List<Map<String, dynamic>> _log = [];
+  final List<Vector3Readings> _log = [];
 
   StreamSubscription<MagnetometerEvent>? _sub;
   DateTime? _lastAdded;
@@ -23,15 +23,16 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
     _sub = magnetometerEventStream().listen((event) {
       final now = DateTime.now();
       if (_lastAdded == null ||
-          now.difference(_lastAdded!).inMilliseconds >= 500) {
+          now.difference(_lastAdded!).inMilliseconds >= aquireTime) {
         _lastAdded = now;
         setState(() {
-          _log.insert(0, {
-            'time': now,
-            'x': event.x,
-            'y': event.y,
-            'z': event.z,
-          });
+          _log.insert(0, Vector3Readings(
+              time: now,
+              x: event.x,
+              y: event.y,
+              z: event.z,
+            ),
+          );
           if (_log.length > 50) {
             _log.removeLast();
           }
@@ -69,13 +70,25 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
                       ),
 
                       const SizedBox(height: 8),
-                      Text('x: ${latest['x'].toStringAsFixed(2)} m/s²',style: baseTextStyle),
-                      Text('y: ${latest['y'].toStringAsFixed(2)} m/s²',style: baseTextStyle),
-                      Text('z: ${latest['z'].toStringAsFixed(2)} m/s²',style: baseTextStyle),
+                      Text('x: ${latest.x.toStringAsFixed(2)} m/s²',style: baseTextStyle),
+                      Text('y: ${latest.y.toStringAsFixed(2)} m/s²',style: baseTextStyle),
+                      Text('z: ${latest.z.toStringAsFixed(2)} m/s²',style: baseTextStyle),
                     ],
                   ),
           ),
-
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ElevatedButton(
+              onPressed: () async {
+                await exportToFile("magnetometer.txt", "MAGNETOMETER LOG", _log, context); 
+              },
+              child: const Text(
+                "EKSPORTUJ DANE DO PLIKU",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
           const Divider(),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -92,7 +105,7 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
               itemCount: _log.length,
               itemBuilder: (context, index) {
                 final sample = _log[index];
-                final time = sample['time'] as DateTime;
+                final time = sample.time;
                 final timeStr =
                     '${time.hour.toString().padLeft(2, '0')}:'
                     '${time.minute.toString().padLeft(2, '0')}:'
@@ -101,9 +114,9 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
                 return ListTile(
                   dense: true,
                   title: Text(
-                    'x: ${sample['x'].toStringAsFixed(2)}, '
-                    'y: ${sample['y'].toStringAsFixed(2)}, '
-                    'z: ${sample['z'].toStringAsFixed(2)}',
+                    'x: ${sample.x.toStringAsFixed(2)}, '
+                    'y: ${sample.y.toStringAsFixed(2)}, '
+                    'z: ${sample.z.toStringAsFixed(2)}',
                     style: baseTextStyle,
                   ),
                   subtitle: Text('Czas: $timeStr'),
