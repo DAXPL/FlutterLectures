@@ -12,7 +12,8 @@ const baseTextStyle = TextStyle(
                           color: kAccentColor
                         );
 const headerTextStyle = TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: kBackgroundColor);
-const int aquireTime = 100;
+const int aquireTime = 20;
+const int maximumSensorsReadings = 1000;
 
 class Vector3Readings {
   final DateTime time;

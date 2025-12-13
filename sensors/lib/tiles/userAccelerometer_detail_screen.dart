@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import '../constants.dart';
+import 'dart:math';
 
 class UserAccelerometerDetailScreen extends StatefulWidget {
   const UserAccelerometerDetailScreen({super.key});
@@ -34,7 +35,7 @@ class _UserAccelerometerDetailScreenState extends State<UserAccelerometerDetailS
             ),
           );
 
-          if (_log.length > 50) {
+          if (_log.length > maximumSensorsReadings) {
             _log.removeLast();
           }
         });
@@ -96,14 +97,14 @@ class _UserAccelerometerDetailScreenState extends State<UserAccelerometerDetailS
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Historia (co ~0.5 s):',
+                'Historia:',
                 style: baseTextStyle,
               ),
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: _log.length,
+              itemCount: min(_log.length, 10),
               itemBuilder: (context, index) {
                 final sample = _log[index];
                 final time = sample.time;
