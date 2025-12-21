@@ -6,6 +6,7 @@ import 'tiles/userAccelerometer_tile.dart';
 import 'tiles/battery_tile.dart';
 import 'tiles/magnetometer_tile.dart';
 import 'tiles/gyroscope_tile.dart';
+import 'tiles/throw_tile.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -28,6 +29,7 @@ class DashboardScreen extends StatelessWidget {
           UserAccelerometerTile(),
           MagnetometerTile(),
           GyroscopeTile(),
+          ThrowTile(),
           Card(color: kAccentColor)
         ],
       ),
