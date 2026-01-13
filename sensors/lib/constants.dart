@@ -12,7 +12,7 @@ const baseTextStyle = TextStyle(
                           color: kAccentColor
                         );
 const headerTextStyle = TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: kBackgroundColor);
-const int aquireTime = 20;
+const int aquireTime = 50;//maks 20
 const int maximumSensorsReadings = 10000;
 
 class Vector3Readings {

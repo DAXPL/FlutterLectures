@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import '../constants.dart';
 import '../charts/chart_screen.dart';
+import '../charts/chart_live_screen.dart';
 import 'dart:math';
 
 class AccelerometerDetailScreen extends StatefulWidget {
@@ -50,6 +51,11 @@ class _AccelerometerDetailScreenState extends State<AccelerometerDetailScreen> {
     super.dispose();
   }
 
+  List<double> getReadings(){
+    return _log.reversed.map((reading) {
+                  return sqrt(pow(reading.x, 2) + pow(reading.y, 2) + pow(reading.z, 2));
+                }).toList();
+  }
   @override
   Widget build(BuildContext context) {
     final latest = _log.isNotEmpty ? _log.first : null;
@@ -97,20 +103,37 @@ class _AccelerometerDetailScreenState extends State<AccelerometerDetailScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ElevatedButton(
               onPressed: () async {
-                final List<double> magnitudes = _log.reversed.map((reading) {
-                  return sqrt(pow(reading.x, 2) + pow(reading.y, 2) + pow(reading.z, 2));
-                }).toList();
                 Navigator.push(
                   context,  
                   MaterialPageRoute(
                     builder: (_) => ChartScreen(
-                      readings: magnitudes,
+                      readings: getReadings(),
                       title: "Accelerometer snapshot",),
                   ),
                 );
               },
               child: const Text(
                 "WYKRES SNAPSHOT",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ElevatedButton(
+              onPressed: () async {
+                Navigator.push(
+                  context,  
+                  MaterialPageRoute(
+                    builder: (_) => ChartLiveScreen(
+                      getReadings: getReadings,
+                      title: "Accelerometer chart",),
+                  ),
+                );
+              },
+              child: const Text(
+                "WYKRES LIVE",
                 style: TextStyle(fontSize: 16),
               ),
             ),
