@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:sensors/tiles/navButton.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import '../constants.dart';
 
@@ -123,18 +124,9 @@ class _AccelerometerDetailScreenState extends State<ThrowDetailScreen> {
                   ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+          NavButton(label: "EKSPORTUJ DANE DO PLIKU", action: () async {
                 await exportMultireadToFile("throw.txt", "THROW LOG", _log, context);  
-              },
-              child: const Text(
-                "EKSPORTUJ DANE DO PLIKU",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
+              })
         ],
       ),
     );

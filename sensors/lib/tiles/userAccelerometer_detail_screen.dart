@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:sensors/tiles/navButton.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import '../constants.dart';
 import 'dart:math';
@@ -79,19 +80,9 @@ class _UserAccelerometerDetailScreenState extends State<UserAccelerometerDetailS
                   ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+          NavButton(label: "EKSPORTUJ DANE DO PLIKU", action: () async {
                 await exportToFile("uaccel.txt", "USER ACCEL LOG", _log, context); 
-              },
-              child: const Text(
-                "EKSPORTUJ DANE DO PLIKU",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-          const Divider(),
+              }),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Align(
