@@ -5,6 +5,7 @@ import '../constants.dart';
 import '../charts/chart_screen.dart';
 import '../charts/chart_live_screen.dart';
 import 'dart:math';
+import 'navButton.dart';
 
 class GyroscopeDetailScreen extends StatefulWidget {
   const GyroscopeDetailScreen({super.key});
@@ -85,23 +86,11 @@ class _GyroscopeDetailScreenState extends State<GyroscopeDetailScreen> {
                   ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+          NavButton(label: "EKSPORTUJ DANE DO PLIKU", action: () async {
                 await exportToFile("gyro.txt", "GYRO LOG", _log, context); 
-              },
-              child: const Text(
-                "EKSPORTUJ DANE DO PLIKU",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
+              }),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+          NavButton(label: "WYKRES SNAPSHOT", action: () async {
                 Navigator.push(
                   context,  
                   MaterialPageRoute(
@@ -110,18 +99,9 @@ class _GyroscopeDetailScreenState extends State<GyroscopeDetailScreen> {
                       title: "Gyroscope snapshot",),
                   ),
                 );
-              },
-              child: const Text(
-                "WYKRES SNAPSHOT",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
+              }),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+          NavButton(label: "WYKRES LIVE", action: () async {
                 Navigator.push(
                   context,  
                   MaterialPageRoute(
@@ -130,14 +110,7 @@ class _GyroscopeDetailScreenState extends State<GyroscopeDetailScreen> {
                       title: "Gyroscope chart",),
                   ),
                 );
-              },
-              child: const Text(
-                "WYKRES LIVE",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-          const Divider(),
+              }),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Align(

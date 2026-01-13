@@ -3,10 +3,10 @@ import '../constants.dart';
 
 class NavButton extends StatelessWidget {
   final String label;
-  final Widget Function() builder;
+  final Future<void> Function() action;
   const NavButton({
     required this.label,
-    required this.builder,
+    required this.action,
     super.key,
   });
 
@@ -25,15 +25,12 @@ class NavButton extends StatelessWidget {
                 side: const BorderSide(color: Colors.white, width: 2), // Używamy Twoich kolorów
                 foregroundColor: Colors.white,
               ),
-              onPressed: () => _navigate(context),
-              child: Text(label),
+              onPressed: () async => await action(),
+              child: Text(
+                label,
+                style: TextStyle(fontSize: 16),
+              ),
             )
-    );
-  }
-  void _navigate(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => builder()),
     );
   }
 }

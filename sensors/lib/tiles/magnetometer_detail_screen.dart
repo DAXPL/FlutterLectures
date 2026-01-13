@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:sensors/tiles/navButton.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import '../constants.dart';
 import '../charts/chart_screen.dart';
@@ -86,23 +87,10 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
                   ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+          NavButton(label: "EKSPORTUJ DANE DO PLIKU", action: () async {
                 await exportToFile("magnetometer.txt", "MAGNETOMETER LOG", _log, context); 
-              },
-              child: const Text(
-                "EKSPORTUJ DANE DO PLIKU",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+              }),
+          NavButton(label: "WYKRES SNAPSHOT", action: () async {
                 Navigator.push(
                   context,  
                   MaterialPageRoute(
@@ -111,18 +99,8 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
                       title: "Magnetometer snapshot",),
                   ),
                 );
-              },
-              child: const Text(
-                "WYKRES SNAPSHOT",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
+              }),
+          NavButton(label: "WYKRES LIVE", action: () async {
                 Navigator.push(
                   context,  
                   MaterialPageRoute(
@@ -131,14 +109,7 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
                       title: "Magnetometer chart",),
                   ),
                 );
-              },
-              child: const Text(
-                "WYKRES LIVE",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-          const Divider(),
+              }),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Align(
