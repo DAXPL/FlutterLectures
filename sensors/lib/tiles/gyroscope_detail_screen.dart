@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import '../constants.dart';
+import '../charts/chart_screen.dart';
 import 'dart:math';
 
 class GyroscopeDetailScreen extends StatefulWidget {
@@ -85,6 +86,29 @@ class _GyroscopeDetailScreenState extends State<GyroscopeDetailScreen> {
               },
               child: const Text(
                 "EKSPORTUJ DANE DO PLIKU",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ElevatedButton(
+              onPressed: () async {
+                final List<double> magnitudes = _log.reversed.map((reading) {
+                  return sqrt(pow(reading.x, 2) + pow(reading.y, 2) + pow(reading.z, 2));
+                }).toList();
+                Navigator.push(
+                  context,  
+                  MaterialPageRoute(
+                    builder: (_) => ChartScreen(
+                      readings: magnitudes,
+                      title: "Gyroscope snapshot",),
+                  ),
+                );
+              },
+              child: const Text(
+                "WYKRES SNAPSHOT",
                 style: TextStyle(fontSize: 16),
               ),
             ),
