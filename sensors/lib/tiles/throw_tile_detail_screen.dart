@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sensors/tiles/navButton.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import '../charts/chart_screen.dart';
+import '../charts/chart_live_screen.dart';
 import '../constants.dart';
+import 'dart:math';
 
 class ThrowDetailScreen extends StatefulWidget {
   const ThrowDetailScreen({super.key});
@@ -75,7 +78,7 @@ class _AccelerometerDetailScreenState extends State<ThrowDetailScreen> {
   @override
   void tryAddToLog() {
     var latestAcc = _logAcc.isNotEmpty ? _logAcc.first : null;
-    var latestGyro = _logGyro.isNotEmpty ? _logAcc.first : null;
+    var latestGyro = _logGyro.isNotEmpty ? _logGyro.first : null;
     var now = DateTime.now();
     
     if(latestAcc == null || latestGyro == null) return;
@@ -89,10 +92,24 @@ class _AccelerometerDetailScreenState extends State<ThrowDetailScreen> {
           }
   }
 
+List<double> getAccMagnitudes() {
+  return _log.reversed.map((multi) {
+    final acc = multi.readings[0];
+    return sqrt(pow(acc.x, 2) + pow(acc.y, 2) + pow(acc.z, 2));
+  }).toList();
+}
+
+List<double> getGyroMagnitudes() {
+  return _log.reversed.map((multi) {
+    final gyro = multi.readings[1];
+    return sqrt(pow(gyro.x, 2) + pow(gyro.y, 2) + pow(gyro.z, 2));
+  }).toList();
+}
+
   @override
   Widget build(BuildContext context) {
     final latestAcc = _logAcc.isNotEmpty ? _logAcc.first : null;
-    final latestGyro = _logGyro.isNotEmpty ? _logAcc.first : null;
+    final latestGyro = _logGyro.isNotEmpty ? _logGyro.first : null;
     return Scaffold(
       appBar: AppBar(title: const Text('Rzut - szczegóły'),backgroundColor: kBackgroundColor,foregroundColor: kAccentColor,),
       backgroundColor: kBackgroundColor,
@@ -126,6 +143,19 @@ class _AccelerometerDetailScreenState extends State<ThrowDetailScreen> {
           const Divider(),
           NavButton(label: "EKSPORTUJ DANE DO PLIKU", action: () async {
                 await exportMultireadToFile("throw.txt", "THROW LOG", _log, context);  
+              }),
+          NavButton(label: "WYKRES LIVE", action: () async {
+                Navigator.push(
+                  context,  
+                  MaterialPageRoute(
+                    builder: (_) => ChartLiveScreen(
+                      readingFunctions: [
+                        getAccMagnitudes,
+                        getGyroMagnitudes
+                      ],
+                      title: "Throw charts",),
+                  ),
+                );
               })
         ],
       ),

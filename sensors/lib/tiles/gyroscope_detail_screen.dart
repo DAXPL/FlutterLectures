@@ -106,7 +106,7 @@ class _GyroscopeDetailScreenState extends State<GyroscopeDetailScreen> {
                   context,  
                   MaterialPageRoute(
                     builder: (_) => ChartLiveScreen(
-                      getReadings: getReadings,
+                      readingFunctions: [getReadings],
                       title: "Gyroscope chart",),
                   ),
                 );

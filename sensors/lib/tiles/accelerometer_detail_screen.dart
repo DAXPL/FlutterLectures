@@ -105,7 +105,7 @@ class _AccelerometerDetailScreenState extends State<AccelerometerDetailScreen> {
                   context,  
                   MaterialPageRoute(
                     builder: (_) => ChartLiveScreen(
-                      getReadings: getReadings,
+                      readingFunctions: [getReadings],
                       title: "Accelerometer chart",),
                   ),
                 );

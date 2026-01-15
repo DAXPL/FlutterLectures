@@ -10,14 +10,7 @@ class Chart extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        backgroundColor: kBackgroundColor,
-        foregroundColor: kAccentColor,
-      ),
-      backgroundColor: kBackgroundColor,
-      body: Center(
+    return Center(
         child: Container(
           margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(24),
@@ -53,8 +46,7 @@ class Chart extends StatelessWidget{
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

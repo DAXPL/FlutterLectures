@@ -3,11 +3,11 @@ import 'chart.dart';
 import '../constants.dart';
 import 'dart:async';
 class ChartLiveScreen extends StatefulWidget{
-  final List<double> Function() getReadings;
+  final List<List<double> Function()> readingFunctions;
   final String title;
 
   const ChartLiveScreen({
-    required this.getReadings,
+    required this.readingFunctions,
     required this.title,
     super.key,
   });
@@ -32,6 +32,28 @@ class _ChartLiveScreen extends State<ChartLiveScreen>{
 
   @override
   Widget build(BuildContext context) {
-    return Chart(readings: widget.getReadings(), title: widget.title);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: kBackgroundColor,
+        foregroundColor: kAccentColor,
+      ),
+      backgroundColor: kBackgroundColor,
+      body: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        itemCount: widget.readingFunctions.length,
+        separatorBuilder: (context, index) => const Divider(
+          color: Colors.grey,
+          indent: 20,
+          endIndent: 20,
+        ),
+        itemBuilder: (context, index) {
+          return Chart(
+            readings: widget.readingFunctions[index](),
+            title: "${widget.title} #${index + 1}", 
+          );
+        },
+      ),
+    );
   }
 }

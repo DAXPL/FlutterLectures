@@ -105,7 +105,7 @@ class _MagnetometerDetailScreenState extends State<MagnetometerDetailScreen> {
                   context,  
                   MaterialPageRoute(
                     builder: (_) => ChartLiveScreen(
-                      getReadings: getReadings,
+                      readingFunctions: [getReadings],
                       title: "Magnetometer chart",),
                   ),
                 );
