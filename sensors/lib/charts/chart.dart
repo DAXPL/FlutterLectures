@@ -39,7 +39,7 @@ class Chart extends StatelessWidget {
               lineGradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.blue, Colors.cyan],
+                colors: [Colors.blue, Colors.yellow],
               ),
               fillMode: FillMode.below,
               fillGradient: LinearGradient(
