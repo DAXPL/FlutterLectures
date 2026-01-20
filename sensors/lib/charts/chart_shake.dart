@@ -150,7 +150,7 @@ class _ChartShakeScreen extends State<ChartShake> {
             width: double.infinity,
             margin: const EdgeInsets.only(
               bottom: 20,
-            ), // Podnosi cały kontener o 20px nad dół ekranu
+            ), 
             padding: const EdgeInsets.all(48),
             decoration: BoxDecoration(
               color: kAccentColor,
