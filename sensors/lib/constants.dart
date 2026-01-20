@@ -67,7 +67,6 @@ Future<void> exportMultireadToFile(String filename,String logName, List<Vector3M
     try {
       final dir = await getApplicationDocumentsDirectory();
       final file = File('${dir.path}/$filename');
-
       final buffer = StringBuffer();
     buffer.writeln('=== $logName ===');
     for(final reading in _log)

@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:sensors/charts/chart_shake.dart';
 import 'package:sensors/tiles/navButton.dart';
 import 'package:sensors_plus/sensors_plus.dart';
-import '../charts/chart_screen.dart';
-import '../charts/chart_live_screen.dart';
 import '../constants.dart';
 import 'dart:math';
 
@@ -148,12 +147,12 @@ List<double> getGyroMagnitudes() {
                 Navigator.push(
                   context,  
                   MaterialPageRoute(
-                    builder: (_) => ChartLiveScreen(
+                    builder: (_) => ChartShake(
                       readingFunctions: [
                         getAccMagnitudes,
                         getGyroMagnitudes
                       ],
-                      title: "Throw charts",),
+                      title: "Shake charts",),
                   ),
                 );
               })

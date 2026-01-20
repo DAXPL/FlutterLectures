@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sensors/tiles/navButton.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import '../charts/chart_steps.dart';
 import '../constants.dart';
 import 'dart:math';
 
@@ -50,6 +51,12 @@ class _UserAccelerometerDetailScreenState extends State<UserAccelerometerDetailS
     super.dispose();
   }
 
+  List<double> getReadings(){
+    return _log.reversed.map((reading) {
+                  return sqrt(pow(reading.x, 2) + pow(reading.y, 2) + pow(reading.z, 2));
+                }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final latest = _log.isNotEmpty ? _log.first : null;
@@ -82,6 +89,18 @@ class _UserAccelerometerDetailScreenState extends State<UserAccelerometerDetailS
           const Divider(),
           NavButton(label: "EKSPORTUJ DANE DO PLIKU", action: () async {
                 await exportToFile("uaccel.txt", "USER ACCEL LOG", _log, context); 
+              }),
+              NavButton(label: "WYKRES LIVE", action: () async {
+                Navigator.push(
+                  context,  
+                  MaterialPageRoute(
+                    builder: (_) => ChartSteps(
+                      readingFunctions: [
+                        getReadings,
+                      ],
+                      title: "Step chart",),
+                  ),
+                );
               }),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
